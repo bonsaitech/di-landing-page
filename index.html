@@ -1397,7 +1397,11 @@
         fetch('/api/contact', { method:'POST', body: JSON.stringify(Object.fromEntries(new FormData(form))) })
     */
 
-    setTimeout(showSuccess, 1400);
+    fetch('https://formspree.io/f/maqlaglv', {
+  method: 'POST',
+  body: new FormData(form),
+  headers: { 'Accept': 'application/json' }
+}).then(r => r.ok ? showSuccess() : (btn.textContent = 'Error — try again', btn.disabled = false));
   }
 
   function showSuccess() {
