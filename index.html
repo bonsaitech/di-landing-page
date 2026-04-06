@@ -1,0 +1,1354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI Business Acceleration Workshop — Developers.Institute.Mauritius</title>
+  <meta name="description" content="An 18-hour strategic AI workshop for SMEs in Mauritius. Walk away with a concrete 30-60-90 day roadmap. Eligible for 70–90% HRDC/MQA refund. Book before June 30, 2026." />
+
+  <!--
+    LOGO FILES:
+    - Dark header uses the white logo: LOGO-DI-BLANC__2_.png
+    - Copy your logo files into the same folder as this HTML, OR update the src paths below.
+  -->
+
+  <!-- Font: Outfit — clean, professional, highly legible at all weights -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ═══════════════════════════════════════
+       DESIGN TOKENS
+    ═══════════════════════════════════════ */
+    :root {
+      --bg:         #f6f5f3;
+      --surface:    #ffffff;
+      --text:       #111111;
+      --muted:      #606060;
+      --light:      #a0a0a0;
+      --border:     #e3e1dc;
+      --border-s:   #c8c4bc;
+
+      --red:        #d42b2b;
+      --red-d:      #b01f1f;
+      --red-soft:   #fdf1f1;
+
+      --green:      #15803d;
+      --green-soft: #f0fdf4;
+      --green-b:    #bbf7d0;
+
+      --dark-hdr:   #111111;
+
+      --mu-r:#ea2839; --mu-b:#1f2f98; --mu-y:#ffd100; --mu-g:#00a551;
+
+      --f: 'Outfit', sans-serif;
+
+      --s1:8px; --s2:16px; --s3:24px; --s4:32px;
+      --s5:48px; --s6:64px; --s7:96px;
+
+      --r-sm:8px; --r-md:14px; --r-lg:22px; --r-xl:32px;
+
+      --sh-sm: 0 2px 8px rgba(0,0,0,.06);
+      --sh-md: 0 8px 28px rgba(0,0,0,.09);
+      --sh-lg: 0 20px 60px rgba(0,0,0,.11);
+
+      --max-w: 1180px;
+    }
+
+    *, *::before, *::after { box-sizing:border-box; margin:0; padding:0; }
+    html { scroll-behavior:smooth; font-size:16px; }
+    body { font-family:var(--f); background:var(--bg); color:var(--text); line-height:1.6; -webkit-font-smoothing:antialiased; }
+    img  { max-width:100%; display:block; }
+    a    { text-decoration:none; color:inherit; }
+    ul   { list-style:none; }
+
+    .container { width:min(100% - 40px, var(--max-w)); margin:0 auto; }
+    .section    { padding:var(--s7) 0; }
+    .section-sm { padding:var(--s6) 0; }
+
+    /* ── Typography ── */
+    .eyebrow {
+      display:inline-flex; align-items:center; gap:10px;
+      font-size:11px; font-weight:700; letter-spacing:.14em; text-transform:uppercase;
+      color:var(--red); margin-bottom:var(--s2);
+    }
+    .eyebrow::before { content:''; display:inline-block; width:20px; height:2px; background:var(--red); border-radius:2px; }
+
+    .section-title {
+      font-family:var(--f); font-size:clamp(28px,4vw,50px);
+      font-weight:800; line-height:1.08; letter-spacing:-.025em; margin-bottom:var(--s2);
+    }
+    .section-sub { font-size:17px; color:var(--muted); max-width:640px; line-height:1.7; }
+    .highlight { color:var(--red); }
+
+    /* ── Buttons ── */
+    .btn {
+      display:inline-flex; align-items:center; justify-content:center; gap:8px;
+      font-family:var(--f); font-weight:700; font-size:15px; border-radius:999px;
+      cursor:pointer; transition:all .2s ease; white-space:nowrap; border:none; text-align:center;
+    }
+    .btn-primary { background:var(--red); color:#fff; padding:15px 30px; box-shadow:0 4px 18px rgba(212,43,43,.3); }
+    .btn-primary:hover { background:var(--red-d); transform:translateY(-2px); box-shadow:0 8px 28px rgba(212,43,43,.38); }
+    .btn-secondary { background:transparent; color:var(--text); padding:14px 26px; border:1.5px solid var(--border-s); }
+    .btn-secondary:hover { background:var(--surface); border-color:var(--text); }
+    .btn-lg  { padding:17px 38px; font-size:16px; }
+    .btn-xl  { padding:19px 46px; font-size:17px; }
+    .btn-arrow::after { content:'→'; transition:transform .2s ease; }
+    .btn-arrow:hover::after { transform:translateX(4px); }
+
+    /* ── Mauritius stripe ── */
+    .mu-stripe {
+      display:block; height:4px; border-radius:999px; width:68px; margin-top:16px; opacity:.75;
+      background:linear-gradient(90deg,var(--mu-r) 25%,var(--mu-b) 25% 50%,var(--mu-y) 50% 75%,var(--mu-g) 75%);
+    }
+
+    /* ══════════════════════════════════════
+       ① HEADER — dark with white logo
+    ══════════════════════════════════════ */
+    .header {
+      position:sticky; top:0; z-index:1000;
+      background:rgba(17,17,17,.96); backdrop-filter:blur(16px);
+      border-bottom:1px solid rgba(255,255,255,.07);
+    }
+    .header-inner {
+      display:flex; align-items:center; justify-content:space-between;
+      gap:var(--s2); min-height:68px;
+    }
+    .logo-wrap { display:flex; align-items:center; }
+    /* White logo on dark header */
+    .logo-img { height:38px; width:auto; object-fit:contain; }
+
+    .header-right { display:flex; align-items:center; gap:var(--s2); }
+    .header-note { font-size:13px; color:rgba(255,255,255,.45); font-weight:400; }
+
+    /* header CTA slightly different on dark bg */
+    .header .btn-primary { box-shadow:0 4px 18px rgba(212,43,43,.45); }
+
+    /* ══════════════════════════════════════
+       ② HERO
+    ══════════════════════════════════════ */
+    .hero { padding:var(--s7) 0 var(--s5); position:relative; overflow:hidden; }
+    .hero::before {
+      content:''; position:absolute; inset:0; pointer-events:none;
+      background-image:linear-gradient(var(--border) 1px,transparent 1px),
+                       linear-gradient(90deg,var(--border) 1px,transparent 1px);
+      background-size:52px 52px; opacity:.35;
+    }
+    .hero-inner { position:relative; z-index:1; }
+    .hero-grid { display:grid; grid-template-columns:1.15fr .85fr; gap:var(--s5); align-items:center; }
+
+    .hero-kicker {
+      display:inline-flex; align-items:center; gap:10px;
+      background:var(--surface); border:1px solid var(--border); border-radius:999px;
+      padding:7px 16px; font-size:13px; font-weight:600; color:var(--muted);
+      margin-bottom:var(--s3); box-shadow:var(--sh-sm);
+    }
+    .pulse { width:7px; height:7px; border-radius:50%; background:var(--red); flex-shrink:0; animation:blink 2s ease infinite; }
+    @keyframes blink { 0%,100%{opacity:1;transform:scale(1)} 50%{opacity:.55;transform:scale(.8)} }
+
+    .hero h1 {
+      font-size:clamp(38px,5.8vw,70px); font-weight:800;
+      line-height:1.02; letter-spacing:-.03em; margin-bottom:var(--s3);
+    }
+    .hero h1 em { font-style:normal; color:var(--red); }
+    .hero-sub { font-size:18px; color:var(--muted); max-width:540px; line-height:1.7; margin-bottom:var(--s4); }
+    .hero-cta-row { display:flex; flex-wrap:wrap; align-items:center; gap:14px; margin-bottom:var(--s4); }
+
+    .client-row { display:flex; align-items:center; gap:10px; flex-wrap:wrap; }
+    .client-row-label { font-size:11px; color:var(--light); text-transform:uppercase; letter-spacing:.09em; width:100%; }
+    .chip { background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:6px 14px; font-size:13px; font-weight:600; color:var(--muted); box-shadow:var(--sh-sm); }
+
+    /* Hero summary card */
+    .hero-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl);
+      padding:var(--s4); box-shadow:var(--sh-lg); position:relative; overflow:hidden;
+    }
+    .hero-card::after {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--mu-r),var(--mu-b),var(--mu-y),var(--mu-g));
+    }
+    .hc-label { font-size:11px; font-weight:700; letter-spacing:.1em; text-transform:uppercase; color:var(--muted); margin-bottom:var(--s2); }
+    .stat-grid { display:grid; grid-template-columns:1fr 1fr; gap:10px; margin-bottom:var(--s3); }
+    .stat { background:var(--bg); border-radius:var(--r-md); padding:13px 15px; }
+    .stat strong { display:block; font-size:24px; font-weight:800; line-height:1.1; margin-bottom:3px; }
+    .stat small { font-size:11px; color:var(--muted); line-height:1.3; }
+
+    .badge-green {
+      display:flex; align-items:center; gap:10px; background:var(--green-soft);
+      border:1px solid var(--green-b); border-radius:var(--r-md); padding:12px 15px; margin-bottom:10px;
+    }
+    .badge-green strong { display:block; font-size:13px; font-weight:700; color:#14532d; margin-bottom:2px; }
+    .badge-green span { font-size:12px; color:var(--green); }
+
+    .badge-orange {
+      display:flex; align-items:center; gap:10px; background:#fff8f0;
+      border:1px solid #fed7aa; border-radius:var(--r-md); padding:10px 15px; font-size:13px;
+    }
+    .badge-orange strong { color:#c2410c; font-weight:700; }
+    .badge-orange span { color:var(--muted); }
+
+    /* KPI row */
+    .kpi-row {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      padding:var(--s4) 0; margin-top:var(--s5);
+      border-top:1px solid var(--border); border-bottom:1px solid var(--border);
+    }
+    .kpi { text-align:center; padding:var(--s2); border-right:1px solid var(--border); }
+    .kpi:last-child { border-right:none; }
+    .kpi strong { display:block; font-size:30px; font-weight:800; line-height:1.1; margin-bottom:5px; }
+    .kpi p { font-size:13px; color:var(--muted); line-height:1.4; }
+
+    /* ══════════════════════════════════════
+       ③ TRUST BAND
+    ══════════════════════════════════════ */
+    .trust-band { padding:20px 0; background:var(--surface); border-top:1px solid var(--border); border-bottom:1px solid var(--border); }
+    .trust-inner { display:flex; align-items:center; justify-content:center; gap:var(--s5); flex-wrap:wrap; }
+    .trust-label { font-size:11px; color:var(--light); text-transform:uppercase; letter-spacing:.1em; }
+    .trust-logos { display:flex; align-items:center; gap:var(--s3); flex-wrap:wrap; justify-content:center; }
+    .trust-pill { display:flex; align-items:center; gap:8px; border:1px solid var(--border); border-radius:var(--r-md); padding:9px 18px; background:var(--bg); }
+    .trust-pill .tp-name { font-size:14px; font-weight:700; }
+    .trust-pill .tp-sub { font-size:11px; color:var(--muted); display:block; line-height:1.2; }
+
+    /* ══════════════════════════════════════
+       ④ PROBLEM
+    ══════════════════════════════════════ */
+    .two-col { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:start; }
+    .problem-item { display:flex; gap:16px; padding:var(--s3) 0; border-bottom:1px solid var(--border); }
+    .problem-item:last-child { border-bottom:none; }
+    .p-num { font-size:22px; font-weight:800; color:var(--border-s); line-height:1; flex-shrink:0; min-width:30px; }
+    .problem-item h4 { font-size:16px; font-weight:700; margin-bottom:4px; }
+    .problem-item p { font-size:14px; color:var(--muted); line-height:1.6; }
+    .pull-quote { background:var(--surface); border-left:4px solid var(--red); border-radius:0 var(--r-lg) var(--r-lg) 0; padding:var(--s4); box-shadow:var(--sh-sm); }
+    .pull-quote blockquote { font-size:20px; font-weight:600; line-height:1.4; letter-spacing:-.01em; margin-bottom:var(--s3); color:var(--text); }
+    .pull-quote cite { font-style:normal; font-size:13px; color:var(--muted); }
+    .pull-quote-footer { margin-top:var(--s4); padding-top:var(--s4); border-top:1px solid var(--border); }
+
+    /* ══════════════════════════════════════
+       ⑤ WHY NOW
+    ══════════════════════════════════════ */
+    .dark-panel { background:var(--text); color:#fff; border-radius:var(--r-xl); padding:var(--s6) var(--s5); }
+    .dark-panel .eyebrow { color:#e57373; }
+    .dark-panel .eyebrow::before { background:#e57373; }
+    .dark-panel .section-title { color:#fff; }
+    .dark-panel .section-sub { color:rgba(255,255,255,.58); }
+    .opp-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s3); margin-top:var(--s5); }
+    .opp-card { background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--r-lg); padding:var(--s3); }
+    .opp-icon { font-size:24px; margin-bottom:12px; display:block; }
+    .opp-card h4 { font-size:16px; font-weight:700; color:#fff; margin-bottom:8px; }
+    .opp-card p { font-size:14px; color:rgba(255,255,255,.52); line-height:1.6; }
+
+    /* ══════════════════════════════════════
+       ⑥ POSITIONING
+    ══════════════════════════════════════ */
+    .vs-table { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); overflow:hidden; box-shadow:var(--sh-sm); }
+    .vs-hdr { display:grid; grid-template-columns:1fr 1fr 1fr; background:var(--bg); border-bottom:1px solid var(--border); }
+    .vs-hdr div { padding:11px 15px; font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; color:var(--muted); }
+    .vs-hdr div:nth-child(3) { color:var(--red); background:var(--red-soft); }
+    .vs-row { display:grid; grid-template-columns:1fr 1fr 1fr; border-bottom:1px solid var(--border); }
+    .vs-row:last-child { border-bottom:none; }
+    .vs-row div { padding:12px 15px; font-size:13px; line-height:1.4; }
+    .vs-row div:first-child { color:var(--muted); font-weight:600; border-right:1px solid var(--border); }
+    .vs-row div:nth-child(2) { color:var(--muted); border-right:1px solid var(--border); }
+    .vs-row div:nth-child(3) { background:var(--red-soft); font-weight:600; }
+    .ck { color:#16a34a; margin-right:3px; } .cx { color:#dc2626; margin-right:3px; }
+
+    .pill-stack { display:flex; flex-direction:column; gap:12px; }
+    .pill { display:flex; align-items:flex-start; gap:14px; background:var(--surface); border:1px solid var(--border); border-radius:var(--r-md); padding:16px 18px; box-shadow:var(--sh-sm); }
+    .pill-ico { width:36px; height:36px; background:var(--red-soft); border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; font-size:18px; flex-shrink:0; }
+    .pill h4 { font-size:15px; font-weight:700; margin-bottom:4px; }
+    .pill p { font-size:13px; color:var(--muted); line-height:1.5; }
+
+    /* ══════════════════════════════════════
+       ⑦ DELIVERABLES
+    ══════════════════════════════════════ */
+    .del-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s3); }
+    .del-card { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s4); box-shadow:var(--sh-sm); position:relative; overflow:hidden; }
+    .del-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--red); }
+    .del-num { font-size:42px; font-weight:800; line-height:1; color:var(--border); margin-bottom:var(--s2); }
+    .del-card h3 { font-size:16px; font-weight:700; margin-bottom:8px; }
+    .del-card p { font-size:13px; color:var(--muted); line-height:1.6; }
+
+    /* ══════════════════════════════════════
+       ⑧ USE CASES
+    ══════════════════════════════════════ */
+    .uc-wrap { background:var(--surface); border-radius:var(--r-xl); padding:var(--s6) var(--s5); border:1px solid var(--border); }
+    .uc-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s3); margin-top:var(--s4); }
+    .uc-card { border:1px solid var(--border); border-radius:var(--r-lg); padding:var(--s3); transition:all .2s ease; }
+    .uc-card:hover { border-color:var(--red); box-shadow:0 0 0 3px rgba(212,43,43,.07); transform:translateY(-2px); }
+    .uc-icon { font-size:24px; margin-bottom:10px; }
+    .uc-card h4 { font-size:15px; font-weight:700; margin-bottom:7px; }
+    .uc-card p { font-size:13px; color:var(--muted); line-height:1.55; }
+
+    /* ══════════════════════════════════════
+       ⑨ TEAM / INSTRUCTORS
+    ══════════════════════════════════════ */
+    .team-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s4); margin-top:var(--s5); }
+    .team-card {
+      background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl);
+      padding:var(--s4); text-align:center; box-shadow:var(--sh-sm);
+      transition:all .22s ease; position:relative; overflow:hidden;
+    }
+    .team-card:hover { box-shadow:var(--sh-md); transform:translateY(-3px); }
+    .team-card::before {
+      content:''; position:absolute; top:0; left:0; right:0; height:3px;
+      background:linear-gradient(90deg,var(--mu-r),var(--mu-b),var(--mu-y),var(--mu-g));
+    }
+    .team-avatar {
+      width:80px; height:80px; border-radius:50%; margin:0 auto var(--s3);
+      display:flex; align-items:center; justify-content:center;
+      font-size:28px; font-weight:800; color:#fff;
+      /* Replace background with actual photo: set as img src inside .team-avatar */
+    }
+    .team-avatar.a1 { background:linear-gradient(135deg,#1a1a2e,#16213e); }
+    .team-avatar.a2 { background:linear-gradient(135deg,#7b1d1d,var(--red)); }
+    .team-avatar.a3 { background:linear-gradient(135deg,#14532d,#16a34a); }
+    /* To use a real photo: wrap an <img> inside .team-avatar and set border-radius:50%;width:80px;height:80px;object-fit:cover; */
+
+    .team-name { font-size:18px; font-weight:800; margin-bottom:4px; letter-spacing:-.01em; }
+    .team-title { font-size:12px; font-weight:700; text-transform:uppercase; letter-spacing:.09em; color:var(--red); margin-bottom:var(--s2); }
+    .team-bio { font-size:13px; color:var(--muted); line-height:1.65; margin-bottom:var(--s3); }
+    .team-tags { display:flex; flex-wrap:wrap; justify-content:center; gap:6px; }
+    .team-tag { background:var(--bg); border:1px solid var(--border); border-radius:999px; padding:4px 12px; font-size:11px; font-weight:600; color:var(--muted); }
+
+    /* ══════════════════════════════════════
+       ⑩ TESTIMONIALS
+    ══════════════════════════════════════ */
+    .testi-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s3); margin-top:var(--s5); }
+    .testi-card {
+      background:var(--bg); border:1px solid var(--border); border-radius:var(--r-lg);
+      padding:var(--s4); display:flex; flex-direction:column; gap:var(--s3); position:relative;
+    }
+    .testi-card::before { content:'"'; position:absolute; top:12px; right:18px; font-size:64px; font-weight:800; line-height:1; color:var(--border); pointer-events:none; }
+    .stars { display:flex; gap:3px; margin-bottom:2px; }
+    .star { color:#f59e0b; font-size:13px; }
+    .testi-quote { font-size:14px; line-height:1.72; color:var(--text); flex:1; }
+    .testi-quote strong { color:var(--red); }
+    .testi-person { display:flex; align-items:center; gap:12px; padding-top:var(--s2); border-top:1px solid var(--border); }
+    .t-avatar { width:40px; height:40px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:15px; font-weight:800; color:#fff; flex-shrink:0; }
+    .t-name { font-size:14px; font-weight:700; margin-bottom:2px; }
+    .t-role { font-size:12px; color:var(--muted); }
+    .t-tag { display:inline-block; background:var(--surface); border:1px solid var(--border); border-radius:999px; padding:3px 10px; font-size:11px; font-weight:600; color:var(--muted); margin-top:3px; }
+
+    /* Photo strip */
+    .photo-strip { display:grid; grid-template-columns:repeat(3,1fr); gap:var(--s2); margin-top:var(--s5); }
+    .photo-item { aspect-ratio:4/3; border-radius:var(--r-md); overflow:hidden; background:var(--border); border:1px solid var(--border); }
+    .photo-item img { width:100%; height:100%; object-fit:cover; }
+    .photo-ph { display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; color:var(--muted); font-size:12px; height:100%; text-align:center; padding:var(--s2); }
+    .photo-ph span { font-size:26px; }
+
+    /* ══════════════════════════════════════
+       ⑪ PROCESS
+    ══════════════════════════════════════ */
+    .process-track { display:grid; grid-template-columns:repeat(3,1fr); gap:0; position:relative; margin-top:var(--s5); }
+    .process-track::before { content:''; position:absolute; top:29px; left:calc(100%/6); right:calc(100%/6); height:2px; background:linear-gradient(90deg,var(--border),var(--red),var(--border)); z-index:0; }
+    .p-step { text-align:center; padding:0 var(--s3); position:relative; z-index:1; }
+    .step-circle { width:58px; height:58px; border-radius:50%; display:flex; align-items:center; justify-content:center; font-size:20px; font-weight:800; margin:0 auto var(--s3); border:2px solid var(--border); background:var(--surface); position:relative; z-index:1; }
+    .step-circle.on { background:var(--red); color:#fff; border-color:var(--red); box-shadow:0 0 0 8px rgba(212,43,43,.1); }
+    .p-step h3 { font-size:17px; font-weight:700; margin-bottom:8px; }
+    .p-step p { font-size:13px; color:var(--muted); line-height:1.6; }
+    .step-tag { display:inline-block; background:var(--bg); border:1px solid var(--border); border-radius:999px; padding:3px 12px; font-size:11px; color:var(--muted); margin-bottom:var(--s2); }
+
+    /* ══════════════════════════════════════
+       ⑫ HRDC
+    ══════════════════════════════════════ */
+    .hrdc-layout { display:grid; grid-template-columns:1.1fr .9fr; gap:var(--s5); align-items:center; }
+    .hrdc-panel { background:var(--surface); border:1px solid var(--border); border-radius:var(--r-xl); padding:var(--s5); box-shadow:var(--sh-md); position:relative; overflow:hidden; }
+    .hrdc-panel::after { content:''; position:absolute; bottom:0; left:0; right:0; height:4px; background:linear-gradient(90deg,var(--mu-r),var(--mu-b),var(--mu-y),var(--mu-g)); }
+    .hrdc-big { font-size:70px; font-weight:800; line-height:1; color:var(--green); margin-bottom:4px; }
+    .hrdc-big sup { font-size:34px; vertical-align:super; }
+    .hrdc-lbl { font-size:16px; font-weight:600; margin-bottom:var(--s4); line-height:1.4; }
+    .hrdc-math { background:var(--bg); border-radius:var(--r-md); padding:var(--s3); margin-bottom:var(--s3); }
+    .math-row { display:flex; justify-content:space-between; align-items:center; padding:7px 0; font-size:14px; border-bottom:1px solid var(--border); }
+    .math-row:last-child { border-bottom:none; font-weight:700; font-size:15px; color:var(--green); }
+    .math-row .l { color:var(--muted); }
+    .hrdc-steps { display:flex; flex-direction:column; gap:14px; }
+    .h-step { display:flex; align-items:flex-start; gap:13px; }
+    .h-n { width:26px; height:26px; border-radius:50%; background:var(--red); color:#fff; font-size:12px; font-weight:700; display:flex; align-items:center; justify-content:center; flex-shrink:0; }
+    .h-step div h5 { font-size:14px; font-weight:700; margin-bottom:2px; }
+    .h-step div p { font-size:13px; color:var(--muted); }
+
+    /* ══════════════════════════════════════
+       ⑬ URGENCY
+    ══════════════════════════════════════ */
+    .urgency {
+      background:linear-gradient(135deg,#111 0%,#2a1515 100%);
+      border-radius:var(--r-xl); padding:var(--s5); color:#fff; position:relative; overflow:hidden;
+    }
+    .urgency::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 80% 50%,rgba(212,43,43,.15) 0%,transparent 65%); }
+    .urgency-inner { position:relative; z-index:1; display:grid; grid-template-columns:1fr auto; gap:var(--s5); align-items:center; }
+    .urgency h2 { font-size:clamp(18px,2.8vw,30px); font-weight:800; letter-spacing:-.02em; margin-bottom:var(--s2); color:#fff; line-height:1.2; }
+    .urgency p { color:rgba(255,255,255,.58); font-size:15px; max-width:560px; }
+    .loss-box { background:rgba(212,43,43,.14); border:1px solid rgba(212,43,43,.3); border-radius:var(--r-md); padding:11px 16px; margin-top:var(--s2); display:inline-block; }
+    .loss-box strong { color:#f87171; font-size:14px; }
+    .date-box { background:rgba(255,255,255,.07); border:1px solid rgba(255,255,255,.14); border-radius:var(--r-lg); padding:var(--s3) var(--s4); text-align:center; white-space:nowrap; }
+    .date-box strong { display:block; font-size:24px; font-weight:800; color:#f87171; margin-bottom:4px; }
+    .date-box span { font-size:11px; color:rgba(255,255,255,.45); text-transform:uppercase; letter-spacing:.07em; }
+
+    /* ══════════════════════════════════════
+       ⑭ PRICING
+    ══════════════════════════════════════ */
+    .price-layout { display:grid; grid-template-columns:1fr 1fr; gap:var(--s5); align-items:start; }
+    .price-card { background:var(--surface); border:1.5px solid var(--red); border-radius:var(--r-xl); padding:var(--s5); box-shadow:0 0 0 3px rgba(212,43,43,.08),var(--sh-md); }
+    .price-badge { display:inline-block; background:var(--red); color:#fff; font-size:11px; font-weight:700; letter-spacing:.09em; text-transform:uppercase; padding:5px 14px; border-radius:999px; margin-bottom:var(--s3); }
+    .price-amount { font-size:44px; font-weight:800; line-height:1; letter-spacing:-.03em; margin-bottom:4px; }
+    .price-amount sub { font-size:18px; vertical-align:baseline; font-weight:600; }
+    .price-per { font-size:13px; color:var(--muted); margin-bottom:var(--s4); }
+    .price-feats { display:flex; flex-direction:column; gap:10px; margin-bottom:var(--s4); }
+    .pf { display:flex; align-items:flex-start; gap:10px; font-size:14px; }
+    .pf-ck { width:18px; height:18px; border-radius:50%; background:#dcfce7; display:flex; align-items:center; justify-content:center; font-size:10px; flex-shrink:0; margin-top:2px; color:#16a34a; }
+    .net-box { background:var(--green-soft); border:1px solid var(--green-b); border-radius:var(--r-md); padding:var(--s3); margin-bottom:var(--s3); }
+    .net-row { display:flex; justify-content:space-between; font-size:14px; padding:5px 0; }
+    .net-row.tot { border-top:1px solid var(--green-b); margin-top:8px; padding-top:10px; font-weight:700; font-size:15px; color:#14532d; }
+
+    /* ══════════════════════════════════════
+       ⑮ FORM / CTA
+    ══════════════════════════════════════ */
+    .form-section { background:var(--text); border-radius:var(--r-xl); padding:var(--s6) var(--s5); position:relative; overflow:hidden; }
+    .form-section::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse at 18% 50%,rgba(212,43,43,.11) 0%,transparent 50%),radial-gradient(ellipse at 82% 50%,rgba(31,47,152,.09) 0%,transparent 50%); }
+    .form-layout { display:grid; grid-template-columns:1fr 1fr; gap:var(--s6); align-items:start; position:relative; z-index:1; }
+    .form-copy h2 { font-size:clamp(24px,3.8vw,48px); font-weight:800; letter-spacing:-.03em; line-height:1.05; color:#fff; margin-bottom:var(--s3); }
+    .form-copy h2 em { font-style:normal; color:#f87171; }
+    .form-copy p { font-size:15px; color:rgba(255,255,255,.58); line-height:1.7; margin-bottom:var(--s4); }
+    .f-trust { display:flex; flex-direction:column; gap:9px; margin-bottom:var(--s4); }
+    .f-trust-item { display:flex; align-items:center; gap:10px; font-size:13px; color:rgba(255,255,255,.52); }
+    .f-trust-item::before { content:'✓'; color:#4ade80; font-weight:700; }
+    .contact-box { padding:var(--s3); background:rgba(255,255,255,.06); border:1px solid rgba(255,255,255,.1); border-radius:var(--r-md); }
+    .cb-label { font-size:10px; color:rgba(255,255,255,.38); text-transform:uppercase; letter-spacing:.1em; font-weight:700; margin-bottom:9px; }
+    .cb-line { font-size:14px; color:rgba(255,255,255,.7); margin-bottom:5px; }
+    .cb-line:last-child { margin-bottom:0; font-size:13px; color:rgba(255,255,255,.42); }
+
+    /* Form card */
+    .booking-form { background:var(--surface); border-radius:var(--r-xl); padding:var(--s4); box-shadow:0 20px 64px rgba(0,0,0,.3); }
+    .form-title { font-size:18px; font-weight:800; margin-bottom:var(--s3); }
+    .f-grid { display:grid; grid-template-columns:1fr 1fr; gap:13px; }
+    .fg { display:flex; flex-direction:column; gap:5px; }
+    .fg.full { grid-column:1/-1; }
+    .fg label { font-size:11px; font-weight:700; text-transform:uppercase; letter-spacing:.07em; color:var(--muted); }
+    .fg input, .fg select, .fg textarea {
+      border:1.5px solid var(--border); border-radius:var(--r-md); padding:11px 14px;
+      font-family:var(--f); font-size:14px; color:var(--text); background:var(--bg);
+      transition:border-color .18s; width:100%; outline:none; appearance:none;
+    }
+    .fg input:focus, .fg select:focus, .fg textarea:focus { border-color:var(--red); background:var(--surface); }
+    .fg textarea { resize:vertical; min-height:72px; }
+    .f-submit {
+      width:100%; margin-top:var(--s2); background:var(--red); color:#fff; padding:15px;
+      border:none; border-radius:999px; font-family:var(--f); font-size:16px; font-weight:700;
+      cursor:pointer; transition:all .2s ease; box-shadow:0 4px 18px rgba(212,43,43,.3);
+    }
+    .f-submit:hover { background:var(--red-d); transform:translateY(-1px); }
+    .f-submit:disabled { opacity:.7; cursor:not-allowed; transform:none; }
+    .f-note { font-size:11px; color:var(--muted); text-align:center; margin-top:10px; line-height:1.5; }
+    .f-success { display:none; text-align:center; padding:var(--s5) var(--s3); }
+    .f-success-ico { font-size:46px; margin-bottom:var(--s2); }
+    .f-success h3 { font-size:22px; font-weight:800; margin-bottom:10px; }
+    .f-success p { font-size:14px; color:var(--muted); }
+
+    /* ══════════════════════════════════════
+       ⑯ FOOTER
+    ══════════════════════════════════════ */
+    .footer { padding:var(--s5) 0 var(--s4); border-top:1px solid var(--border); }
+    .footer-inner { display:flex; justify-content:space-between; align-items:flex-start; flex-wrap:wrap; gap:var(--s3); }
+    .footer-logo img { height:28px; width:auto; }
+    /* White logo on dark bg won't work on light footer — use dark logo or SVG fallback */
+    .footer-logo-fallback { font-size:15px; font-weight:800; }
+    .footer-logo-fallback .dot { color:var(--red); }
+    .footer-links { display:flex; gap:var(--s3); flex-wrap:wrap; }
+    .footer-links a { font-size:13px; color:var(--muted); transition:color .15s; }
+    .footer-links a:hover { color:var(--text); }
+    .footer-copy { font-size:12px; color:var(--light); text-align:center; width:100%; margin-top:var(--s2); padding-top:var(--s2); border-top:1px solid var(--border); }
+
+    /* ══════════════════════════════════════
+       ⑰ FLOATING WHATSAPP CTA
+    ══════════════════════════════════════ */
+    .wa-float {
+      position:fixed; bottom:28px; right:28px; z-index:9999;
+      display:flex; flex-direction:column; align-items:flex-end; gap:10px;
+    }
+    .wa-tooltip {
+      background:var(--text); color:#fff; font-size:13px; font-weight:600;
+      padding:8px 14px; border-radius:var(--r-md); white-space:nowrap;
+      box-shadow:var(--sh-md); opacity:0; transform:translateX(10px);
+      transition:all .25s ease; pointer-events:none;
+    }
+    .wa-float:hover .wa-tooltip { opacity:1; transform:translateX(0); }
+    .wa-btn {
+      width:58px; height:58px; border-radius:50%;
+      background:#25d366; display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 20px rgba(37,211,102,.45); transition:all .22s ease; cursor:pointer;
+      border:3px solid #fff;
+    }
+    .wa-btn:hover { transform:scale(1.08); box-shadow:0 8px 32px rgba(37,211,102,.55); }
+    .wa-btn svg { width:30px; height:30px; fill:#fff; }
+
+    /* Pulse ring around WA button */
+    .wa-btn::before {
+      content:''; position:absolute; width:58px; height:58px; border-radius:50%;
+      background:#25d366; opacity:.3; animation:wa-pulse 2s ease infinite;
+    }
+    @keyframes wa-pulse { 0%{transform:scale(1);opacity:.3} 70%{transform:scale(1.5);opacity:0} 100%{transform:scale(1.5);opacity:0} }
+    .wa-btn { position:relative; }
+
+    /* ══════════════════════════════════════
+       ANIMATIONS
+    ══════════════════════════════════════ */
+    @keyframes fadeUp { from{opacity:0;transform:translateY(18px)} to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation:fadeUp .6s ease forwards; }
+    .d1{animation-delay:.08s;opacity:0;animation-fill-mode:forwards}
+    .d2{animation-delay:.18s;opacity:0;animation-fill-mode:forwards}
+    .d3{animation-delay:.30s;opacity:0;animation-fill-mode:forwards}
+    .d4{animation-delay:.44s;opacity:0;animation-fill-mode:forwards}
+
+    /* ══════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════ */
+    @media(max-width:1024px){
+      .hero-grid,.two-col,.hrdc-layout,.price-layout,.form-layout{ grid-template-columns:1fr }
+      .opp-grid,.del-grid,.uc-grid,.testi-grid,.team-grid,.photo-strip{ grid-template-columns:1fr 1fr }
+      .kpi-row{ grid-template-columns:repeat(2,1fr) }
+      .kpi{ border-right:none; border-bottom:1px solid var(--border) }
+      .kpi:nth-child(even){ border-right:none }
+      .kpi:last-child,.kpi:nth-last-child(2):nth-child(odd){ border-bottom:none }
+      .process-track{ grid-template-columns:1fr; gap:var(--s3) }
+      .process-track::before{ display:none }
+      .urgency-inner{ grid-template-columns:1fr; gap:var(--s3) }
+      .header-note{ display:none }
+      .f-grid{ grid-template-columns:1fr }
+      /* VS table: hide middle col on tablet */
+      .vs-hdr div:nth-child(2),.vs-row div:nth-child(2){ display:none }
+      .vs-hdr,.vs-row{ grid-template-columns:1fr 1fr }
+    }
+    @media(max-width:768px){
+      .container{ width:min(100% - 32px,var(--max-w)) }
+      .hero{ padding:var(--s5) 0 var(--s4) }
+      .hero h1{ font-size:36px }
+      .hero-cta-row{ flex-direction:column; align-items:stretch }
+      .btn-xl,.btn-lg{ width:100%; text-align:center }
+      .opp-grid,.del-grid,.uc-grid,.testi-grid,.team-grid,.photo-strip{ grid-template-columns:1fr }
+      .trust-inner{ flex-direction:column; gap:var(--s2) }
+      .form-section{ padding:var(--s5) var(--s3) }
+      .booking-form{ padding:var(--s3) }
+      .hero-card{ margin-top:var(--s3) }
+      .section-title{ font-size:26px }
+      .wa-float{ bottom:20px; right:20px }
+      .footer-inner{ flex-direction:column }
+    }
+    @media(max-width:480px){
+      .hero h1{ font-size:30px }
+      .section-title{ font-size:22px }
+      .kpi-row{ grid-template-columns:1fr 1fr }
+      .hrdc-big{ font-size:54px }
+      .price-amount{ font-size:36px }
+      .stat strong{ font-size:20px }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ═══════════════════════════════════════
+     ① HEADER — dark, white logo
+═══════════════════════════════════════ -->
+<header class="header">
+  <div class="container">
+    <div class="header-inner">
+
+      <a href="#" class="logo-wrap" aria-label="Developers.Institute.Mauritius">
+        <!--
+          White logo on dark header.
+          File: LOGO-DI-BLANC__2_.png (the white version from your uploads)
+          In production, copy the PNG to your web server and update the src path.
+        -->
+        <img
+          class="logo-img"
+          src="assets/logo-white.png"
+          alt="Developers.Institute Mauritius"
+          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
+        />
+        <!-- SVG fallback if image doesn't load -->
+        <div style="display:none;display:flex;align-items:center;gap:10px">
+          <div style="width:38px;height:38px;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
+              <path d="M7 8L3 12L7 16" stroke="#111" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M17 8L21 12L17 16" stroke="#d42b2b" stroke-width="2.2" stroke-linecap="round"/>
+              <path d="M13 6L11 18" stroke="#111" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.15">Developers<span style="color:#d42b2b">.</span>Institute</div>
+            <div style="font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.04em">Mauritius</div>
+          </div>
+        </div>
+      </a>
+
+      <div class="header-right">
+        <span class="header-note">HRDC/MQA refund deadline — June 30, 2026</span>
+        <a href="#book" class="btn btn-primary btn-arrow">Book a Discovery Call</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<main>
+
+<!-- ═══════════════════════════════════════
+     ② HERO
+═══════════════════════════════════════ -->
+<section class="hero">
+  <div class="container hero-inner">
+    <div class="hero-grid">
+
+      <div>
+        <div class="hero-kicker fade-up d1">
+          <span class="pulse"></span>
+          AI Business Acceleration Workshop · Mauritius 2026
+        </div>
+
+        <h1 class="fade-up d2">
+          Transform your business<br/>with <em>AI in 18 hours.</em>
+        </h1>
+
+        <p class="hero-sub fade-up d3">
+          A strategic, hands-on workshop exclusively for Mauritian SME leadership teams. Leave with a concrete 30-60-90 day roadmap, 3 to 5 validated AI opportunities, and a clear path to execution.
+        </p>
+
+        <div class="hero-cta-row fade-up d4">
+          <a href="#book" class="btn btn-primary btn-xl btn-arrow">Book My Free Discovery Call</a>
+          <a href="#workshop" class="btn btn-secondary btn-lg">See What's Included</a>
+        </div>
+
+        <div class="fade-up d4">
+          <div class="client-row">
+            <span class="client-row-label">Trusted by Mauritian companies</span>
+            <span class="chip">MIPS</span>
+            <span class="chip">Leading hotel group</span>
+            <span class="chip">Investment fund</span>
+            <span class="chip">Financial services</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="fade-up d3">
+        <div class="hero-card">
+          <div class="hc-label">Workshop at a glance</div>
+          <div class="stat-grid">
+            <div class="stat"><strong>18h</strong><small>Total workshop duration</small></div>
+            <div class="stat"><strong>3–5</strong><small>Concrete AI use cases identified</small></div>
+            <div class="stat"><strong>90-day</strong><small>Action roadmap delivered</small></div>
+            <div class="stat"><strong>24 000 <small style="font-size:12px;font-weight:600">MUR</small></strong><small>Per participant, same company</small></div>
+          </div>
+
+          <div class="badge-green">
+            <span style="font-size:20px">✅</span>
+            <div>
+              <strong>70% to 90% HRDC/MQA refund eligible</strong>
+              <span>Your company may recover most of the investment</span>
+            </div>
+          </div>
+
+          <div class="badge-orange">
+            <span>⚠️</span>
+            <div>
+              <strong>Deadline: June 30, 2026 — </strong>
+              <span>unused HRDC/MQA budgets are permanently forfeited.</span>
+            </div>
+          </div>
+
+          <span class="mu-stripe" style="margin-top:16px"></span>
+        </div>
+      </div>
+
+    </div>
+
+    <div class="kpi-row">
+      <div class="kpi"><strong><span class="highlight">18h</span></strong><p>Structured sessions with your team</p></div>
+      <div class="kpi"><strong>90 days</strong><p>Executable roadmap, ready from day one</p></div>
+      <div class="kpi"><strong><span class="highlight">–90%</span></strong><p>Potential net cost after HRDC/MQA refund</p></div>
+      <div class="kpi"><strong>June 30</strong><p>Hard deadline — act before your budget expires</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ③ TRUST BAND -->
+<div class="trust-band">
+  <div class="container">
+    <div class="trust-inner">
+      <span class="trust-label">Companies we've worked with</span>
+      <div class="trust-logos">
+        <div class="trust-pill">
+          <span style="font-size:16px">🏦</span>
+          <div><span class="tp-name">MIPS</span><small class="tp-sub">Fintech · Payments</small></div>
+        </div>
+        <div class="trust-pill">
+          <span style="font-size:16px">🏨</span>
+          <div><span class="tp-name">Leading Hotel Group</span><small class="tp-sub">Hospitality · Revenue &amp; Finance</small></div>
+        </div>
+        <div class="trust-pill">
+          <span style="font-size:16px">📈</span>
+          <div><span class="tp-name">Investment Fund</span><small class="tp-sub">Finance · Advanced Analytics</small></div>
+        </div>
+        <div class="trust-pill">
+          <span style="font-size:16px">🏢</span>
+          <div><span class="tp-name">Financial Services</span><small class="tp-sub">Operations · AI Integration</small></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- ④ PROBLEM -->
+<section class="section">
+  <div class="container">
+    <div class="two-col">
+      <div>
+        <span class="eyebrow">The Challenge</span>
+        <h2 class="section-title">Most leaders know AI is urgent. Few know where to start.</h2>
+        <span class="mu-stripe"></span>
+        <div style="margin-top:var(--s4)">
+          <div class="problem-item">
+            <div class="p-num">01</div>
+            <div><h4>No clear AI strategy</h4><p>Leadership sees the potential but cannot identify which AI initiatives would actually move the needle for their specific business.</p></div>
+          </div>
+          <div class="problem-item">
+            <div class="p-num">02</div>
+            <div><h4>Generic advice, no execution plan</h4><p>Webinars and conferences leave teams inspired but without a concrete plan, a clear owner, or a defined next step.</p></div>
+          </div>
+          <div class="problem-item">
+            <div class="p-num">03</div>
+            <div><h4>Resource and talent constraints</h4><p>Most SMEs cannot afford a dedicated AI team. They need a practical entry point that fits their size, structure, and budget.</p></div>
+          </div>
+          <div class="problem-item">
+            <div class="p-num">04</div>
+            <div><h4>The competitive window is closing</h4><p>Competitors are already automating processes and reducing costs. Companies that delay by 12 to 24 months face a compounding structural disadvantage.</p></div>
+          </div>
+        </div>
+      </div>
+
+      <div>
+        <div class="pull-quote">
+          <blockquote>"We know we need to do something with AI — but we don't know what to prioritise, or whether it will actually work for us."</blockquote>
+          <cite>— A sentiment we hear every week from CEOs of Mauritian SMEs</cite>
+          <div class="pull-quote-footer">
+            <p style="font-size:15px;color:var(--muted);margin-bottom:var(--s3)">This workshop was built precisely to answer that question — not in theory, but in action. With your team. In your context.</p>
+            <a href="#book" class="btn btn-primary btn-arrow" style="font-size:14px;padding:13px 22px">Start with a Free 15-Min Call</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑤ WHY NOW -->
+<section class="section-sm">
+  <div class="container">
+    <div class="dark-panel">
+      <span class="eyebrow">The Window</span>
+      <h2 class="section-title">Now is the best time to build your AI advantage.</h2>
+      <p class="section-sub" style="margin-top:12px">The tools are mature. The costs are accessible. And for the first time, Mauritian SMEs have access to structured, refundable programmes to make the transition — before the competitive gap widens.</p>
+      <div class="opp-grid">
+        <div class="opp-card">
+          <span class="opp-icon">⚡</span>
+          <h4>The technology is ready</h4>
+          <p>AI tools available today — for reporting, customer support, decision-making, and workflow — work without a full technical team. You don't need a CTO to start.</p>
+        </div>
+        <div class="opp-card">
+          <span class="opp-icon">📉</span>
+          <h4>The cost of waiting is real</h4>
+          <p>Companies delaying AI adoption by 12 to 24 months face compounding disadvantages: slower operations, higher costs, and competitors who automated while they hesitated.</p>
+        </div>
+        <div class="opp-card">
+          <span class="opp-icon">🇲🇺</span>
+          <h4>Mauritius offers a unique moment</h4>
+          <p>HRDC/MQA funding makes this the most cost-effective AI entry point available in Mauritius. This alignment of government support and practical tooling won't last indefinitely.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑥ POSITIONING -->
+<section id="workshop" class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--s6)">
+      <span class="eyebrow">What This Is — And What It Isn't</span>
+      <h2 class="section-title">Not a training course.<br/>A strategic accelerator.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">Designed for business leaders, not technical teams. The output is a decision-ready roadmap — built with your people, grounded in your specific business reality.</p>
+    </div>
+    <div class="two-col" style="align-items:start">
+      <div style="position:sticky;top:80px">
+        <div class="vs-table">
+          <div class="vs-hdr"><div>Criteria</div><div>Generic Training</div><div>This Workshop</div></div>
+          <div class="vs-row"><div>Output</div><div><span class="cx">✗</span>Certificate</div><div><span class="ck">✓</span>Executable roadmap</div></div>
+          <div class="vs-row"><div>Focus</div><div><span class="cx">✗</span>Theory &amp; concepts</div><div><span class="ck">✓</span>Your business, your data</div></div>
+          <div class="vs-row"><div>Attendees</div><div><span class="cx">✗</span>Mixed public group</div><div><span class="ck">✓</span>Your team only</div></div>
+          <div class="vs-row"><div>Decisions</div><div><span class="cx">✗</span>Post-training reflection</div><div><span class="ck">✓</span>Made during the session</div></div>
+          <div class="vs-row"><div>Next steps</div><div><span class="cx">✗</span>Vague recommendations</div><div><span class="ck">✓</span>Prioritised action items</div></div>
+          <div class="vs-row"><div>ROI timeline</div><div><span class="cx">✗</span>Long-term, uncertain</div><div><span class="ck">✓</span>30-60-90 day milestones</div></div>
+        </div>
+      </div>
+      <div class="pill-stack">
+        <div class="pill"><div class="pill-ico">🔍</div><div><h4>Diagnostic: What are your real AI opportunities?</h4><p>We map your existing processes, identify bottlenecks, and surface the 3 to 5 areas where AI can deliver the most measurable impact — specific to your company and industry.</p></div></div>
+        <div class="pill"><div class="pill-ico">🗺️</div><div><h4>Roadmap: 30-60-90 days, not vague intentions</h4><p>Each initiative is assigned a timeline, an owner, and a success criterion. You leave knowing what to do first, what to delegate, and what to defer.</p></div></div>
+        <div class="pill"><div class="pill-ico">⚙️</div><div><h4>Preparation: Ready for implementation</h4><p>Your team understands what resources, integrations, and decisions are needed before execution — so you don't hit avoidable walls on day one.</p></div></div>
+        <div class="pill"><div class="pill-ico">🚀</div><div><h4>Continuation: Post-workshop opportunities</h4><p>For companies ready to move fast: access to automation, dashboard development, and business cockpit projects that turn the roadmap into live, measurable results.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑦ DELIVERABLES -->
+<section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--s5)">
+      <span class="eyebrow">Tangible Outputs</span>
+      <h2 class="section-title">What your company walks away with.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">Not slides to review later. Working documents built collaboratively during the workshop — ready to hand to your leadership team the next morning.</p>
+    </div>
+    <div class="del-grid">
+      <div class="del-card"><div class="del-num">01</div><h3>3–5 Validated AI Use Cases</h3><p>Concrete, prioritised opportunities specific to your industry, team size, and current processes — not generic examples from a report.</p></div>
+      <div class="del-card"><div class="del-num">02</div><h3>30-60-90 Day Action Roadmap</h3><p>A sequenced execution plan with clear owners, timelines, and success metrics. Actionable from the Monday after the workshop.</p></div>
+      <div class="del-card"><div class="del-num">03</div><h3>Implementation Priority Matrix</h3><p>A ranked view of your AI initiatives by impact, feasibility, and cost — so your team can allocate resources with confidence.</p></div>
+      <div class="del-card"><div class="del-num">04</div><h3>Technology Readiness Assessment</h3><p>An honest evaluation of what your company already has, what it needs, and what realistic first steps look like given your constraints.</p></div>
+      <div class="del-card"><div class="del-num">05</div><h3>Next-Step Opportunity Brief</h3><p>A structured document outlining automation, dashboard, and business cockpit opportunities available in the 6 months following the workshop.</p></div>
+      <div class="del-card" style="background:var(--red-soft);border-color:#fdd"><div class="del-num" style="color:#fbb">+</div><h3>Post-Workshop Support Access</h3><p>For companies proceeding to implementation: technical consultation, vendor selection, and project scoping support from our team.</p></div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑧ USE CASES -->
+<section class="section">
+  <div class="container">
+    <div class="uc-wrap">
+      <div style="max-width:620px;margin-bottom:var(--s5)">
+        <span class="eyebrow">Real-World Applications</span>
+        <h2 class="section-title">The kinds of impact we identify together.</h2>
+        <p class="section-sub">Examples of AI initiatives we regularly uncover during the workshop — adapted each time to the company's context, team, and priorities.</p>
+      </div>
+      <div class="uc-grid">
+        <div class="uc-card"><div class="uc-icon">📊</div><h4>Reporting Automation</h4><p>Automated pipelines generate accurate reports on-demand — eliminating manual data pulls and saving hours of analyst time every week.</p></div>
+        <div class="uc-card"><div class="uc-icon">💬</div><h4>AI-Assisted Customer Support</h4><p>Triage, classify, and respond to routine queries automatically — reducing response time and freeing your team for high-value interactions.</p></div>
+        <div class="uc-card"><div class="uc-icon">🎯</div><h4>Sales Pipeline Optimisation</h4><p>Score leads, surface priority opportunities, and automate follow-up — so your team focuses on deals most likely to close.</p></div>
+        <div class="uc-card"><div class="uc-icon">📈</div><h4>KPI Dashboards &amp; Business Cockpits</h4><p>Live performance dashboards for management — replacing scattered reports with a single source of truth your leadership acts on daily.</p></div>
+        <div class="uc-card"><div class="uc-icon">⚙️</div><h4>Workflow Automation</h4><p>Map and automate repetitive internal processes — approvals, data entry, onboarding — cutting operational overhead and human error.</p></div>
+        <div class="uc-card" style="background:var(--bg);border-style:dashed"><div class="uc-icon">🔎</div><h4>Your Use Case, Uncovered</h4><p>Every company is different. The workshop is designed to surface the AI opportunity that is most relevant and most achievable for your specific business.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ════════════════════════════════════════════
+     ⑨ MEET THE TEAM
+     Why this section works: In a small market like Mauritius, decision-makers
+     often know people personally. Real names and faces = instant credibility.
+════════════════════════════════════════════ -->
+<section class="section-sm" style="background:var(--surface);border-top:1px solid var(--border);border-bottom:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:0">
+      <span class="eyebrow">The Team Behind the Workshop</span>
+      <h2 class="section-title">Practitioners, not lecturers.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">
+        Our facilitators have built real AI solutions for real Mauritian businesses. They understand the local business context, the constraints, and what actually works here.
+      </p>
+    </div>
+
+    <div class="team-grid">
+
+      <!-- Abraham — Operations Director -->
+      <div class="team-card">
+        <!--
+          To use a real photo, replace the div.team-avatar with:
+          <img src="path/to/abraham-photo.jpg" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto var(--s3);" alt="Abraham" />
+        -->
+        <div class="team-avatar a1">A</div>
+        <div class="team-name">Abraham</div>
+        <div class="team-title">Director of Operations</div>
+        <p class="team-bio">Abraham oversees all programme delivery and client engagement. With a background in business transformation and technology deployment across Mauritius, he ensures every workshop delivers measurable outcomes — not just frameworks.</p>
+        <div class="team-tags">
+          <span class="team-tag">Business Strategy</span>
+          <span class="team-tag">Operations</span>
+          <span class="team-tag">Programme Design</span>
+        </div>
+      </div>
+
+      <!-- Rayhaan — Instructor -->
+      <div class="team-card">
+        <!--
+          To use a real photo, replace the div.team-avatar with:
+          <img src="path/to/rayhaan-photo.jpg" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto var(--s3);" alt="Rayhaan" />
+        -->
+        <div class="team-avatar a2">R</div>
+        <div class="team-name">Rayhaan</div>
+        <div class="team-title">AI &amp; Automation Expert</div>
+        <p class="team-bio">Rayhaan specialises in translating AI concepts into working business solutions. He has designed and deployed automation, data pipelines, and intelligent workflows for companies across fintech, hospitality, and professional services in Mauritius.</p>
+        <div class="team-tags">
+          <span class="team-tag">AI Integration</span>
+          <span class="team-tag">Process Automation</span>
+          <span class="team-tag">Low-Code / No-Code</span>
+        </div>
+      </div>
+
+      <!-- Victor — Instructor -->
+      <div class="team-card">
+        <!--
+          To use a real photo, replace the div.team-avatar with:
+          <img src="path/to/victor-photo.jpg" style="width:80px;height:80px;border-radius:50%;object-fit:cover;margin:0 auto var(--s3);" alt="Victor" />
+        -->
+        <div class="team-avatar a3">V</div>
+        <div class="team-name">Victor</div>
+        <div class="team-title">Data &amp; BI Specialist</div>
+        <p class="team-bio">Victor leads the data analytics and business intelligence components of the workshop. His expertise covers Power BI, decision support systems, and KPI frameworks — turning raw business data into actionable management insights for executives.</p>
+        <div class="team-tags">
+          <span class="team-tag">Power BI</span>
+          <span class="team-tag">Data Analytics</span>
+          <span class="team-tag">Decision Support</span>
+        </div>
+      </div>
+
+    </div>
+
+    <p style="text-align:center;font-size:13px;color:var(--light);margin-top:var(--s3)">
+      <!-- Replace initials with real photos by updating the team-avatar elements above -->
+      Add professional photos of Abraham, Rayhaan and Victor to replace the initials placeholders
+    </p>
+  </div>
+</section>
+
+
+<!-- ⑩ TESTIMONIALS -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="eyebrow">They Did It Before You</span>
+      <h2 class="section-title">Mauritian companies that have already made the move.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">Not case studies. Real projects, real teams, measurable operational outcomes.</p>
+    </div>
+
+    <div class="testi-grid">
+
+      <!-- MIPS — named (has consent) -->
+      <div class="testi-card">
+        <div><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+        <p class="testi-quote">"We engaged Developers.Institute to train 4 members of our team on a bespoke GenAI programme. The result exceeded our expectations: our team can now <strong>automate repetitive tasks, structure data, and build intelligent workflows</strong> — significantly reducing our dependency on external vendors. A genuine operational transformation."</p>
+        <div class="testi-person">
+          <div class="t-avatar" style="background:#1a1a2e">FM</div>
+          <div>
+            <div class="t-name">Florent Masson</div>
+            <div class="t-role">CEO, MIPS</div>
+            <span class="t-tag">🏦 Fintech · Payments · Mauritius</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hotel group — anonymous, Power BI / Finance KPIs -->
+      <div class="testi-card">
+        <div><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+        <p class="testi-quote">"Our finance team was drowning in manual reporting across multiple properties. Developers.Institute helped us build a <strong>Power BI decision centre that consolidates all our financial KPIs in real time</strong>. Management now has instant visibility into performance across the group — decisions that used to take days happen in minutes."</p>
+        <div class="testi-person">
+          <div class="t-avatar" style="background:#1f2f98">DF</div>
+          <div>
+            <div class="t-name">Director of Finance</div>
+            <div class="t-role">Leading Mauritian Hotel Group</div>
+            <span class="t-tag">🏨 Hospitality · Multi-property Finance</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Investment fund — anonymous -->
+      <div class="testi-card">
+        <div><div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div></div>
+        <p class="testi-quote">"As an investment fund, we needed to understand how AI could strengthen our financial analysis and decision-making processes. The <strong>AI for Advanced Finance</strong> programme gave us a structured approach and tools we could apply immediately — practical execution, not theory."</p>
+        <div class="testi-person">
+          <div class="t-avatar" style="background:#00a551">AI</div>
+          <div>
+            <div class="t-name">Analytics Team</div>
+            <div class="t-role">Mauritian Investment Fund</div>
+            <span class="t-tag">📈 Finance · Advanced Analytics</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+    <!-- Workshop photos -->
+    <div class="photo-strip">
+      <div class="photo-item">
+        <img src="assets/workshop-1.jpg" alt="Developers.Institute workshop team" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
+        <div class="photo-ph" style="display:none"><span>📸</span><span>Workshop photo — insert here</span></div>
+      </div>
+      <div class="photo-item"><div class="photo-ph"><span>📸</span><span>Workshop photo 2 — insert here</span></div></div>
+      <div class="photo-item"><div class="photo-ph"><span>📸</span><span>Workshop photo 3 — insert here</span></div></div>
+    </div>
+    <p style="text-align:center;font-size:12px;color:var(--light);margin-top:var(--s2)">Replace grey placeholders with your actual workshop session photos</p>
+  </div>
+</section>
+
+
+<!-- ⑪ PROCESS -->
+<section class="section-sm" style="border-top:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center">
+      <span class="eyebrow">How It Works</span>
+      <h2 class="section-title">Three steps from today to your roadmap.</h2>
+    </div>
+    <div class="process-track">
+      <div class="p-step">
+        <div class="step-circle on">1</div>
+        <div class="step-tag">This week</div>
+        <h3>Book a Discovery Call</h3>
+        <p>A free 15-minute conversation to understand your company and priorities. No pitch. No pressure. No commitment.</p>
+      </div>
+      <div class="p-step">
+        <div class="step-circle">2</div>
+        <div class="step-tag">Within 30 days</div>
+        <h3>Run the Workshop</h3>
+        <p>18 hours of structured, facilitated sessions with your team. We lead. Your people contribute. The roadmap is built together.</p>
+      </div>
+      <div class="p-step">
+        <div class="step-circle">3</div>
+        <div class="step-tag">From day one after</div>
+        <h3>Execute with Confidence</h3>
+        <p>Leave with a prioritised action plan your team owns and a clear view of what comes next — no ambiguity, no dependency on us.</p>
+      </div>
+    </div>
+    <div style="text-align:center;margin-top:var(--s5)">
+      <a href="#book" class="btn btn-primary btn-lg btn-arrow">Book My Free Discovery Call</a>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑫ HRDC / MQA -->
+<section class="section">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--s5)">
+      <span class="eyebrow">Financial Advantage</span>
+      <h2 class="section-title">Your company may recover up to 90% of the cost.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">This workshop is eligible for HRDC and MQA reimbursement. Mauritius-registered companies contributing to the levy can reclaim a significant portion of their training investment.</p>
+    </div>
+    <div class="hrdc-layout">
+      <div class="hrdc-panel">
+        <div class="hrdc-big"><sup>–</sup>90<sup style="font-size:34px">%</sup></div>
+        <div class="hrdc-lbl">Potential net cost reduction<br/>via HRDC/MQA refund</div>
+        <div class="hrdc-math">
+          <div class="math-row"><span class="l">Workshop investment per participant</span><span><strong>24 000 MUR</strong></span></div>
+          <div class="math-row"><span class="l">HRDC/MQA refund (up to 90%)</span><span style="color:var(--green)"><strong>– 21 600 MUR</strong></span></div>
+          <div class="math-row"><span class="l">Estimated net cost per participant</span><span><strong>from 2 400 MUR</strong></span></div>
+        </div>
+        <p style="font-size:13px;color:var(--muted);margin-bottom:var(--s3)">Refund rate depends on your company's levy contributions and HRDC/MQA eligibility criteria. We assist all participants with the application process at no extra cost.</p>
+        <span class="mu-stripe"></span>
+      </div>
+      <div>
+        <p style="font-size:15px;color:var(--muted);margin-bottom:var(--s4);line-height:1.7">Claiming your refund is straightforward. We handle the documentation and guide your HR team through the process — so you focus on the workshop, not the paperwork.</p>
+        <div class="hrdc-steps">
+          <div class="h-step"><div class="h-n">1</div><div><h5>Confirm your eligibility</h5><p>We verify your HRDC/MQA levy status during the discovery call — before any commitment.</p></div></div>
+          <div class="h-step"><div class="h-n">2</div><div><h5>We prepare the documentation</h5><p>All training hours, modules, and outcomes are documented in the format required for reimbursement.</p></div></div>
+          <div class="h-step"><div class="h-n">3</div><div><h5>Submit and receive your refund</h5><p>Your HR team submits the claim. The refund is processed directly by HRDC or MQA into your company account.</p></div></div>
+          <div class="h-step"><div class="h-n">4</div><div><h5>Act before June 30, 2026</h5><p>Budget cycles end on June 30. Unused allocations are permanently lost — no carry-over, no extension.</p></div></div>
+        </div>
+        <div style="margin-top:var(--s4)">
+          <a href="#book" class="btn btn-primary btn-arrow">Check My Company's Eligibility</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑬ URGENCY -->
+<section class="section-sm">
+  <div class="container">
+    <div class="urgency">
+      <div class="urgency-inner">
+        <div>
+          <span style="display:inline-block;font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:#f87171;margin-bottom:12px">⚠ Budget Deadline</span>
+          <h2>Your HRDC/MQA budget expires on June 30, 2026. Permanently.</h2>
+          <p>This is not a soft deadline. Companies that do not allocate their training budget before June 30 forfeit it entirely. No extension. No carry-over. No exception.</p>
+          <div class="loss-box">
+            <strong>💸 A company sending 3 participants loses up to 64 800 MUR in potential refund if they don't act before June 30.</strong>
+          </div>
+        </div>
+        <div>
+          <div class="date-box">
+            <strong>June 30</strong>
+            <span>2026 · Hard deadline</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑭ PRICING -->
+<section class="section" style="background:var(--surface);border-top:1px solid var(--border)">
+  <div class="container">
+    <div style="text-align:center;margin-bottom:var(--s5)">
+      <span class="eyebrow">Investment</span>
+      <h2 class="section-title">Straightforward pricing.<br/>Exceptional return.</h2>
+      <p class="section-sub" style="margin:var(--s2) auto 0">One transparent price. No hidden fees. All participants must come from the same company — ensuring the workshop is entirely tailored to your context.</p>
+    </div>
+    <div class="price-layout">
+      <div class="price-card">
+        <div class="price-badge">AI Business Acceleration Workshop</div>
+        <div class="price-amount">24 000 <sub>MUR</sub></div>
+        <div class="price-per">per participant · same company only</div>
+        <div class="price-feats">
+          <div class="pf"><div class="pf-ck">✓</div><span>18 hours of structured, facilitated sessions</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>3 to 5 identified and validated AI use cases</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>Full 30-60-90 day implementation roadmap</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>Priority matrix and technology readiness assessment</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>Post-workshop opportunity brief</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>HRDC/MQA documentation support for refund</span></div>
+          <div class="pf"><div class="pf-ck">✓</div><span>30-day post-workshop consultation access</span></div>
+        </div>
+        <a href="#book" class="btn btn-primary btn-arrow" style="width:100%;font-size:16px;padding:16px">Book a Discovery Call</a>
+      </div>
+
+      <div>
+        <div class="net-box">
+          <div style="font-size:11px;font-weight:700;color:#14532d;text-transform:uppercase;letter-spacing:.08em;margin-bottom:12px">After HRDC/MQA Refund</div>
+          <div class="net-row"><span>Workshop investment</span><span>24 000 MUR/person</span></div>
+          <div class="net-row"><span>HRDC/MQA refund (example: 80%)</span><span style="color:var(--green)">– 19 200 MUR</span></div>
+          <div class="net-row tot"><span>Estimated net investment</span><span>~4 800 MUR/person</span></div>
+        </div>
+
+        <div style="padding:18px;border:1px solid var(--border);border-radius:var(--r-md);font-size:14px;margin-bottom:14px">
+          <strong style="display:block;margin-bottom:8px">📋 Eligibility conditions</strong>
+          <ul style="color:var(--muted);line-height:1.8;padding-left:16px;list-style:disc">
+            <li>All participants from the same company</li>
+            <li>Company registered in Mauritius</li>
+            <li>Current HRDC/MQA levy contributions</li>
+            <li>Workshop completed before June 30, 2026</li>
+          </ul>
+        </div>
+
+        <div style="padding:16px;background:var(--bg);border-radius:var(--r-md);font-size:14px;color:var(--muted);line-height:1.65;margin-bottom:var(--s3)">
+          <strong style="color:var(--text);display:block;margin-bottom:4px">Not sure if you qualify?</strong>
+          Book a call. We verify your HRDC/MQA status at no cost and walk you through the process before you commit to anything.
+        </div>
+
+        <p style="font-size:13px;color:var(--muted);border-left:3px solid var(--border);padding-left:16px;line-height:1.6">
+          Pricing quoted per participant. Group rates and multi-cohort packages available for larger teams. Contact us to discuss.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ⑮ FORM / FINAL CTA -->
+<section id="book" class="section-sm">
+  <div class="container">
+    <div class="form-section">
+      <div class="form-layout">
+
+        <!-- Copy -->
+        <div class="form-copy">
+          <h2>Your AI roadmap starts with a <em>15-minute call.</em></h2>
+          <p>No pitch. No pressure. A focused conversation about your company, your priorities, and whether this workshop is the right fit. Book a slot that works for you this week.</p>
+          <div class="f-trust">
+            <div class="f-trust-item">Free 15-minute call, no commitment</div>
+            <div class="f-trust-item">HRDC/MQA eligibility confirmed at no cost</div>
+            <div class="f-trust-item">Response within 24 business hours</div>
+            <div class="f-trust-item">Sessions available before June 30, 2026</div>
+          </div>
+          <div class="contact-box">
+            <div class="cb-label">Direct contact</div>
+            <div class="cb-line">📞 <strong style="color:#fff">5500 9123</strong></div>
+            <div class="cb-line">🌐 developers.institute/mauritius</div>
+            <div class="cb-line">📍 Nouvelle Usine Floreal, Mauritius</div>
+          </div>
+        </div>
+
+        <!-- Form -->
+        <div>
+          <div class="booking-form">
+            <div id="form-wrap">
+              <div class="form-title">Book my discovery call</div>
+              <form id="discovery-form" onsubmit="handleSubmit(event)" novalidate>
+                <div class="f-grid">
+                  <div class="fg"><label for="f-fn">First Name *</label><input type="text" id="f-fn" name="first_name" placeholder="Jean" required /></div>
+                  <div class="fg"><label for="f-ln">Last Name *</label><input type="text" id="f-ln" name="last_name" placeholder="Dupont" required /></div>
+                  <div class="fg"><label for="f-co">Company *</label><input type="text" id="f-co" name="company" placeholder="My Company Ltd" required /></div>
+                  <div class="fg">
+                    <label for="f-ro">Your Role *</label>
+                    <select id="f-ro" name="role" required>
+                      <option value="" disabled selected>Select</option>
+                      <option>CEO / Managing Director</option>
+                      <option>HR Manager / HRD</option>
+                      <option>Operations Director</option>
+                      <option>CFO / Finance Director</option>
+                      <option>Other executive</option>
+                    </select>
+                  </div>
+                  <div class="fg"><label for="f-em">Work Email *</label><input type="email" id="f-em" name="email" placeholder="jean@company.mu" required /></div>
+                  <div class="fg"><label for="f-ph">Phone</label><input type="tel" id="f-ph" name="phone" placeholder="5XXX XXXX" /></div>
+                  <div class="fg">
+                    <label for="f-sz">Company Size *</label>
+                    <select id="f-sz" name="company_size" required>
+                      <option value="" disabled selected>Select</option>
+                      <option>15 to 30 employees</option>
+                      <option>30 to 50 employees</option>
+                      <option>50 to 100 employees</option>
+                      <option>100+ employees</option>
+                    </select>
+                  </div>
+                  <div class="fg">
+                    <label for="f-hd">HRDC/MQA Budget Available?</label>
+                    <select id="f-hd" name="hrdc_status">
+                      <option value="" disabled selected>Select</option>
+                      <option>Yes, we contribute</option>
+                      <option>Not sure — to verify</option>
+                      <option>No / not yet</option>
+                    </select>
+                  </div>
+                  <div class="fg full">
+                    <label for="f-ms">Context (optional)</label>
+                    <textarea id="f-ms" name="message" placeholder="Briefly describe your situation or what you'd like to explore on the call…"></textarea>
+                  </div>
+                </div>
+                <button type="submit" class="f-submit" id="submit-btn">Confirm My Discovery Call →</button>
+                <p class="f-note">Your information is kept confidential and used internally only.<br/>We'll contact you within 24h to confirm a time slot.</p>
+              </form>
+            </div>
+
+            <div class="f-success" id="form-success">
+              <div class="f-success-ico">✅</div>
+              <h3>Request received!</h3>
+              <p>We'll be in touch within 24 business hours to confirm your call slot.<br/>In the meantime, reach us directly at <strong>5500 9123</strong>.</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+
+<!-- ⑯ FOOTER -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-inner">
+      <div>
+        <div class="footer-logo-fallback">
+          Developers<span class="dot">.</span>Institute
+        </div>
+        <div style="font-size:11px;color:var(--muted);margin-top:3px">Mauritius · B2B Training &amp; Transformation</div>
+        <span class="mu-stripe" style="margin-top:10px;width:52px;height:3px"></span>
+      </div>
+      <div class="footer-links">
+        <a href="#">About</a>
+        <a href="#">Services</a>
+        <a href="tel:55009123">5500 9123</a>
+        <a href="https://developers.institute/mauritius" target="_blank" rel="noopener">developers.institute/mauritius</a>
+        <a href="#">Privacy</a>
+      </div>
+      <div style="font-size:13px;color:var(--muted)">📍 Nouvelle Usine Floreal, Mauritius</div>
+    </div>
+    <div class="footer-copy">
+      © 2026 Developers.Institute.Mauritius · All rights reserved · This workshop is eligible for HRDC/MQA reimbursement subject to eligibility criteria.
+    </div>
+  </div>
+</footer>
+
+
+<!-- ═══════════════════════════════════════
+     ⑰ FLOATING WHATSAPP CTA
+     Update the href with your actual WhatsApp number:
+     https://wa.me/230XXXXXXXX?text=...
+═══════════════════════════════════════ -->
+<div class="wa-float" role="complementary" aria-label="Contact us on WhatsApp">
+  <div class="wa-tooltip">Chat with us on WhatsApp 👋</div>
+  <a
+    class="wa-btn"
+    href="https://wa.me/23055009123?text=Hello%2C%20I%27m%20interested%20in%20the%20AI%20Business%20Acceleration%20Workshop."
+    target="_blank"
+    rel="noopener noreferrer"
+    aria-label="Contact Developers.Institute on WhatsApp"
+  >
+    <!-- Official WhatsApp SVG icon -->
+    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+  </a>
+</div>
+
+
+<!-- JS: Scroll reveal + Form -->
+<script>
+  // ── Scroll reveal ──
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.style.opacity = '1';
+        e.target.style.transform = 'translateY(0)';
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  document.querySelectorAll(
+    '.del-card,.uc-card,.opp-card,.pill,.h-step,.p-step,.testi-card,.pf,.trust-pill,.team-card'
+  ).forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(16px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+
+  // ── Form submit ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const btn  = document.getElementById('submit-btn');
+
+    // Basic validation highlight
+    let valid = true;
+    form.querySelectorAll('[required]').forEach(el => {
+      el.style.borderColor = '';
+      if (!el.value.trim()) { el.style.borderColor = '#d42b2b'; valid = false; }
+    });
+    if (!valid) return;
+
+    btn.textContent = 'Sending…';
+    btn.disabled = true;
+
+    /*
+      ── INTEGRATION POINT ──
+      Replace the setTimeout below with your actual form endpoint:
+
+      Option A — Formspree (free tier available):
+        fetch('https://formspree.io/f/YOUR_FORM_ID', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        }).then(r => r.ok ? showSuccess() : resetBtn());
+
+      Option B — Netlify Forms:
+        Add netlify attribute to <form> and remove this JS handler.
+
+      Option C — Your own API:
+        fetch('/api/contact', { method:'POST', body: JSON.stringify(Object.fromEntries(new FormData(form))) })
+    */
+
+    setTimeout(showSuccess, 1400);
+  }
+
+  function showSuccess() {
+    document.getElementById('form-wrap').style.display = 'none';
+    document.getElementById('form-success').style.display = 'block';
+  }
+</script>
+
+</body>
+</html>
