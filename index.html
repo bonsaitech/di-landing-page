@@ -17,6 +17,240 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
 
+/* ════════════════════════════════════════
+   RESPONSIVE — paste just before </style>
+   Breakpoints: 1024px / 768px / 480px
+════════════════════════════════════════ */
+
+/* ── Large tablet / small desktop ── */
+@media (max-width: 1024px) {
+
+  /* Grids: 2-col → 1-col */
+  .hero-grid,
+  .two-col,
+  .hrdc-layout,
+  .price-layout,
+  .form-layout {
+    grid-template-columns: 1fr;
+  }
+
+  /* Grids: 3-col → 2-col */
+  .opp-grid,
+  .del-grid,
+  .uc-grid,
+  .testi-grid,
+  .team-grid,
+  .photo-strip {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  /* KPI: 4-col → 2-col */
+  .kpi-row {
+    grid-template-columns: 1fr 1fr;
+  }
+  .kpi {
+    border-right: none;
+    border-bottom: 1px solid var(--border);
+  }
+  .kpi:nth-child(even) { border-right: none; }
+  .kpi:last-child,
+  .kpi:nth-last-child(2):nth-child(odd) { border-bottom: none; }
+
+  /* Process: 3-col → vertical stack */
+  .process-track {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+  .process-track::before { display: none; } /* Hide connector line */
+
+  /* Urgency: 2-col → 1-col */
+  .urgency-inner {
+    grid-template-columns: 1fr;
+    gap: var(--s3);
+  }
+  .date-box { display: inline-block; }
+
+  /* VS comparison table: hide middle column */
+  .vs-hdr div:nth-child(2),
+  .vs-row div:nth-child(2) { display: none; }
+  .vs-hdr,
+  .vs-row { grid-template-columns: 1fr 1fr; }
+
+  /* Sticky positioning off */
+  .positioning-left { position: static; }
+
+  /* Header: hide secondary note */
+  .header-note { display: none; }
+
+  /* Form: single column */
+  .f-grid { grid-template-columns: 1fr; }
+  .fg.full { grid-column: 1; }
+
+  /* Hero card: give it breathing room */
+  .hero-card { margin-top: var(--s3); }
+
+  /* Dark panel inner gap */
+  .dark-panel { padding: var(--s5) var(--s4); }
+}
+
+
+/* ── Tablet / large phone ── */
+@media (max-width: 768px) {
+
+  /* Global spacing */
+  .container { width: min(100% - 32px, var(--max-w)); }
+  .section    { padding: var(--s5) 0; }
+  .section-sm { padding: var(--s4) 0; }
+
+  /* Typography */
+  .section-title { font-size: 26px; }
+  .hero h1       { font-size: 36px; }
+  .hero-sub      { font-size: 16px; }
+
+  /* Header */
+  .header-inner { min-height: 60px; }
+  .logo-img     { height: 30px; }
+  .header .btn-primary { padding: 11px 20px; font-size: 14px; }
+
+  /* Hero CTA: stack buttons */
+  .hero-cta-row {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 12px;
+  }
+  .btn-xl, .btn-lg {
+    width: 100%;
+    justify-content: center;
+  }
+
+  /* All 3-col and 2-col grids → 1-col */
+  .opp-grid,
+  .del-grid,
+  .uc-grid,
+  .testi-grid,
+  .team-grid,
+  .photo-strip { grid-template-columns: 1fr; }
+
+  /* Trust band: stack */
+  .trust-inner  { flex-direction: column; gap: var(--s2); text-align: center; }
+  .trust-logos  { flex-direction: column; align-items: center; gap: 10px; }
+
+  /* Client chips: wrap naturally */
+  .client-row { gap: 8px; }
+
+  /* KPI: keep 2-col on tablet */
+  .kpi-row { grid-template-columns: 1fr 1fr; }
+
+  /* Testimonials full-width cards */
+  .testi-card { padding: var(--s3); }
+
+  /* Team cards */
+  .team-card { padding: var(--s3); }
+
+  /* Pull quote */
+  .pull-quote blockquote { font-size: 17px; }
+
+  /* Form section */
+  .form-section  { padding: var(--s4) var(--s3); border-radius: var(--r-lg); }
+  .booking-form  { padding: var(--s3); }
+  .form-copy h2  { font-size: 28px; }
+
+  /* HRDC panel */
+  .hrdc-big { font-size: 56px; }
+  .hrdc-panel { padding: var(--s4); }
+
+  /* Urgency */
+  .urgency { padding: var(--s4); border-radius: var(--r-lg); }
+  .urgency h2 { font-size: 20px; }
+
+  /* Pricing */
+  .price-card { padding: var(--s4); }
+  .price-amount { font-size: 38px; }
+
+  /* Dark panel */
+  .dark-panel { padding: var(--s4) var(--s3); border-radius: var(--r-lg); }
+
+  /* Workshop positioning table: single column */
+  .two-col { gap: var(--s4); }
+
+  /* Photo strip */
+  .photo-strip { grid-template-columns: 1fr; }
+  .photo-item  { aspect-ratio: 16/9; }
+
+  /* Footer */
+  .footer-inner  { flex-direction: column; gap: var(--s2); }
+  .footer-links  { flex-wrap: wrap; gap: 12px; }
+
+  /* WhatsApp float */
+  .wa-float     { bottom: 18px; right: 18px; }
+  .wa-btn       { width: 52px; height: 52px; }
+  .wa-btn svg   { width: 26px; height: 26px; }
+  .wa-tooltip   { display: none; } /* Hidden on mobile — not useful on touch */
+}
+
+
+/* ── Mobile ── */
+@media (max-width: 480px) {
+
+  /* Typography */
+  .hero h1    { font-size: 28px; letter-spacing: -.02em; }
+  .section-title { font-size: 22px; }
+  .hero-sub   { font-size: 15px; }
+
+  /* KPI: 2-col stays — but smaller text */
+  .kpi strong { font-size: 24px; }
+  .kpi p      { font-size: 12px; }
+
+  /* Stats inside hero card */
+  .stat-grid    { grid-template-columns: 1fr 1fr; gap: 8px; }
+  .stat strong  { font-size: 20px; }
+
+  /* Hero kicker: shorter */
+  .hero-kicker  { font-size: 12px; padding: 6px 14px; }
+
+  /* Eyebrow */
+  .eyebrow { font-size: 10px; }
+
+  /* Buttons */
+  .btn-primary, .btn-secondary { font-size: 14px; }
+  .f-submit { font-size: 15px; }
+
+  /* Pricing */
+  .price-amount { font-size: 32px; }
+  .price-card   { padding: var(--s3); }
+
+  /* HRDC */
+  .hrdc-big { font-size: 46px; }
+  .hrdc-big sup { font-size: 24px; }
+
+  /* Team avatar */
+  .team-avatar { width: 64px; height: 64px; font-size: 22px; }
+  .team-name   { font-size: 16px; }
+
+  /* Testimonial quote */
+  .testi-quote { font-size: 13px; }
+  .testi-card::before { font-size: 48px; }
+
+  /* Deliverable number */
+  .del-num { font-size: 34px; }
+
+  /* Process step */
+  .step-circle { width: 52px; height: 52px; font-size: 18px; }
+
+  /* Form */
+  .form-copy h2 { font-size: 24px; }
+  .booking-form { padding: var(--s2); }
+  .fg input, .fg select, .fg textarea { padding: 10px 13px; font-size: 14px; }
+
+  /* Section padding */
+  .section    { padding: var(--s4) 0; }
+  .section-sm { padding: var(--s3) 0; }
+
+  /* WhatsApp */
+  .wa-float { bottom: 16px; right: 16px; }
+  .wa-btn   { width: 48px; height: 48px; }
+}
+
   <style>
     /* ═══════════════════════════════════════
        DESIGN TOKENS
