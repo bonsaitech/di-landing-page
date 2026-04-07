@@ -610,32 +610,12 @@
     <div class="header-inner">
 
       <a href="#" class="logo-wrap" aria-label="Developers.Institute.Mauritius">
-        <!--
-          White logo on dark header.
-          File: LOGO-DI-BLANC__2_.png (the white version from your uploads)
-          In production, copy the PNG to your web server and update the src path.
-        -->
-        <img
-          class="logo-img"
-          src="assets/logo-white.png"
-          alt="Developers.Institute Mauritius"
-          onerror="this.style.display='none';this.nextElementSibling.style.display='block'"
-        />
-        <!-- SVG fallback if image doesn't load -->
-        <div style="display:none;display:flex;align-items:center;gap:10px">
-          <div style="width:38px;height:38px;background:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none">
-              <path d="M7 8L3 12L7 16" stroke="#111" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M17 8L21 12L17 16" stroke="#d42b2b" stroke-width="2.2" stroke-linecap="round"/>
-              <path d="M13 6L11 18" stroke="#111" stroke-width="1.8" stroke-linecap="round" opacity=".4"/>
-            </svg>
-          </div>
-          <div>
-            <div style="font-size:14px;font-weight:800;color:#fff;line-height:1.15">Developers<span style="color:#d42b2b">.</span>Institute</div>
-            <div style="font-size:10px;color:rgba(255,255,255,.45);letter-spacing:.04em">Mauritius</div>
-          </div>
-        </div>
-      </a>
+  <img
+    class="logo-img"
+    src="assets/logo-white.png"
+    alt="Developers.Institute Mauritius"
+  />
+</a>
 
       <div class="header-right">
         <span class="header-note">HRDC/MQA refund deadline — June 30, 2026</span>
@@ -1035,13 +1015,15 @@
     <!-- Workshop photos -->
     <div class="photo-strip">
       <div class="photo-item">
-        <img src="assets/workshop-1.jpg" alt="Developers.Institute workshop team" onerror="this.style.display='none';this.nextElementSibling.style.display='flex'"/>
-        <div class="photo-ph" style="display:none"><span>📸</span><span>Workshop photo — insert here</span></div>
+        <img src="assets/workshop-1.jpg" alt="Developers.Institute workshop team" />
       </div>
-      <div class="photo-item"><div class="photo-ph"><span>📸</span><span>Workshop photo 2 — insert here</span></div></div>
-      <div class="photo-item"><div class="photo-ph"><span>📸</span><span>Workshop photo 3 — insert here</span></div></div>
+      <div class="photo-item">
+        <img src="assets/workshop-2.jpg" alt="Developers.Institute workshop session" />
+      </div>
+      <div class="photo-item">
+        <img src="assets/workshop-3.jpg" alt="Developers.Institute workshop session" />
+      </div>
     </div>
-    <p style="text-align:center;font-size:12px;color:var(--light);margin-top:var(--s2)">Replace grey placeholders with your actual workshop session photos</p>
   </div>
 </section>
 
